@@ -1,0 +1,27 @@
+{
+  "name": "nodementoring2018q4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karalkou/nodeMentoring2018Q4.git"
+  },
+  "author": "Yury Karalkou <yury.karalkou@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karalkou/nodeMentoring2018Q4/issues"
+  },
+  "homepage": "https://github.com/karalkou/nodeMentoring2018Q4#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "nodemon": "^1.18.6"
+  }
+}
