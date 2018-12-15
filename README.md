@@ -36,3 +36,29 @@ After the installation all these packages should be saved and listed in ​packa
 4. The modules are imported to the main module as described in task 7 and 8.
 5. package.json “start”​​ script uses babel and nodemon to run the app.
 ---
+
+## HOMEWORK 2
+### ASYNC DEVELOPMENT
+#### Installing Node.js & Configuring Babel with Nodemon
+1. Create a directory called ​*data*​. We will assume that CSV files with new products will beuploaded in this directory for processing by our application
+2. In your application create a local module called ​*dirwatcher*​. Create class *​DirWatcherthat* should be able to watch a given ​**path**​​ with a given **​delay** ​​and emit a​​ *‘​changed​‘* eventif directory contents have been changed (implement method *watch(path, delay)* by yourself, try not to use native ​*fs.watch()​*).
+NB: When the path is checked for the first time all files should be treated as new.
+3. Create a module called ​*importer​*. Create class ​*Importer​*. It should be able to listen to *DirWatcher* ​events and start importing CSV files (converting the data to JavaScriptobjects) on *‘​dirwatcher:changed​’* event.
+    - Implement ​*import(path)*​: should return a **​promise** ​​with imported data from file at *​path*​
+    - Implement ​*importSync(path)*​: should be synchronous and return all importeddata from file at *​path*​
+4. In ​**app.js**​:​
+    - Import all of the above modules
+    - Create a ​Dirwatcher​ and ​Importer​ for processing files asynchronously fromdata ​directory
+    - Log imported data to console
+    
+*Note*: every CSV file in a directory should be processed only once.
+*Note*: feel free to use already implemented library for transforming CSV into JSON
+
+
+#### Evaluation Criteria
+1. CSV files are placed in appropriate directory.
+2. DirWatcher​ module is implemented and matches described criteria.
+3. Importer ​module is implemented and matches described criteria.
+4. Application logic is implemented for a fixed (predefined) number of CSV files.
+5. Application logic is implemented for arbitrary number of CSV files (all tasks and subtasksare implemented properly) which could be added/changed/removed at any time.
+---
