@@ -43,7 +43,7 @@ export default class DirWatcher extends EventEmitter {
         );
         console.log('-- removedFiles: \n', removedFiles);
 
-        removedFiles.forEach(file => this.emit("dirwatcher:deleted", file));
+        removedFiles.forEach(file => this.emit("dirwatcher:changed", { type: "deleted", file: file }));
 
         this.files = await Promise.all(fileNames.map(this.handleFileStatus));
         console.log('-- this.files: \n', this.files);
@@ -107,13 +107,13 @@ export default class DirWatcher extends EventEmitter {
                 path: path.join(this.path, fileName),
             };
 
-            this.emit("dirwatcher:added", newFile);
+            this.emit("dirwatcher:changed", { type: "added", file: newFile });
 
             return newFile;
         }
 
         if (file.lastModified < stat.mtimeMs) {
-            this.emit("dirwatcher:modified", file);
+            this.emit("dirwatcher:changed", { type: "modified", file: file });
 
             file.lastModified = stat.mtimeMs;
         }
