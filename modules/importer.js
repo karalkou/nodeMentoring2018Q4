@@ -12,7 +12,8 @@ export default class Importer {
      * @returns {Promise<Converter | *>}
      */
     async import(path) {
-        return this.converter.fromFile(path);
+        // console.log('-- !!! IMPORT !!! --');
+        return csv().fromFile(path); // if we use this.converter then we have an error like "write after end..." ???
     }
 
     /**

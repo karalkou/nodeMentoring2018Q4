@@ -13,7 +13,8 @@ export default class DirWatcher extends EventEmitter {
         this.path = null;
         this.delay = 0;
         this.files = [];
-        this.checkForChanges = this.checkForChanges.bind(this);
+        this.pollTimer = null;
+        this.startCheck = this.startCheck.bind(this);
         this.handleFileStatus = this.handleFileStatus.bind(this);
     }
 
@@ -22,11 +23,29 @@ export default class DirWatcher extends EventEmitter {
      * @param path
      * @param delay
      */
-    watch(path, delay) {
-        console.log('* watch was inited');
+    async watch(path, delay) {
+        //console.log('* watch was inited');
         this.path = path;
         this.delay = delay;
-        setTimeout(this.checkForChanges, this.delay);
+
+        await this.startCheck();
+    }
+
+    /**
+     *
+     * @returns {Promise<void>}
+     */
+    async startCheck() {
+        //console.log('* startCheck was inited');
+        try {
+            //console.log('* startCheck try');
+            await this.checkForChanges();
+            this.pollTimer = setTimeout(this.startCheck, this.delay);
+        } catch (err) {
+            //console.log('* startCheck catch');
+            console.error(err.message);
+            this.destroy();
+        }
     }
 
     /**
@@ -34,19 +53,17 @@ export default class DirWatcher extends EventEmitter {
      * @returns {Promise<void>}
      */
     async checkForChanges() {
-        console.log('* checkForChanges was inited');
+        //console.log('* checkForChanges was inited');
 
         const fileNames = await readDirPromisified(this.path);
-        console.log('-- fileNames: \n', fileNames);
-        const removedFiles = this.files.filter(
-            file => !fileNames.includes(file.name)
-        );
-        console.log('-- removedFiles: \n', removedFiles);
+        //console.log('-- fileNames: \n', fileNames);
+        const removedFiles = this.files.filter(file => !fileNames.includes(file.name));
+        // console.log('-- removedFiles: \n', removedFiles);
 
         removedFiles.forEach(file => this.emit("dirwatcher:changed", { type: "deleted", file: file }));
 
         this.files = await Promise.all(fileNames.map(this.handleFileStatus));
-        console.log('-- this.files: \n', this.files);
+        // console.log('-- this.files: \n', this.files);
 
 
         // const stats = await statPromisified(`${this.path}SampleCSVFile_2kb.csv`);
@@ -82,6 +99,14 @@ export default class DirWatcher extends EventEmitter {
         // console.log('is SampleCSVFile_2kb.csv exist: ', isExistOld);
         // console.log(this.isFileExist(`${this.path}SampleCSVFile_2k.csv`));
 
+    }
+
+    /**
+     *
+     */
+    destroy() {
+        //console.log('* destroy was inited');
+        clearTimeout(this.pollTimer);
     }
 
     /**

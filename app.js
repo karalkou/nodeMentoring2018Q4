@@ -13,13 +13,13 @@ const dirWatcher = new DirWatcher();
 const importer = new Importer();
 
 dirWatcher.on('dirwatcher:changed', async (ev) => {
-    console.log('-- changed');
     const { type, file } = ev;
+    console.log('!- * type: ', type);
 
-    if (type === "deleted") return null;
+    if (type === "deleted") return;
 
     const data = await importer.import(file.path);
-    console.log('-- imported data: ', data);
+    console.log(data);
 });
 
 dirWatcher.watch('./data/', 2000);
