@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 import csv from "csvtojson";
+import { defaultEncoding } from './../config/index.json';
 
 export default class Importer {
     /**
@@ -20,7 +21,7 @@ export default class Importer {
         const data = readFileSync(
             path,
             {
-                encoding: "utf-8",
+                encoding: defaultEncoding,
             }
         );
 

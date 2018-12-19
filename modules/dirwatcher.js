@@ -2,10 +2,11 @@ import path from 'path';
 import { EventEmitter } from 'events';
 import { readdir, stat, access } from 'fs';
 import { promisify } from 'util';
+import { defaultEncoding } from './../config/index.json';
 
 const readDirPromisified = promisify(readdir);
 const statPromisified = promisify(stat);
-// const accessPromisified = promisify(access);
+const accessPromisified = promisify(access);
 
 export default class DirWatcher extends EventEmitter {
     constructor() {
@@ -28,7 +29,8 @@ export default class DirWatcher extends EventEmitter {
         this.path = path;
         this.delay = delay;
 
-        await this.startCheck();
+        // await this.startCheck();
+        this.experiments();
     }
 
     /**
@@ -55,7 +57,7 @@ export default class DirWatcher extends EventEmitter {
     async checkForChanges() {
         //console.log('* checkForChanges was inited');
 
-        const fileNames = await readDirPromisified(this.path);
+        const fileNames = await readDirPromisified(this.path, { encoding: defaultEncoding });
         //console.log('-- fileNames: \n', fileNames);
         const removedFiles = this.files.filter(file => !fileNames.includes(file.name));
         // console.log('-- removedFiles: \n', removedFiles);
@@ -64,40 +66,6 @@ export default class DirWatcher extends EventEmitter {
 
         this.files = await Promise.all(fileNames.map(this.handleFileStatus));
         // console.log('-- this.files: \n', this.files);
-
-
-        // const stats = await statPromisified(`${this.path}SampleCSVFile_2kb.csv`);
-        // console.log('stats: ', stats);
-
-        /*const isExist = await accessPromisified(
-            `${this.path}SampleCSVFile_2kb.csv`,
-            (err) => {
-                if(!err) {
-                    console.log('file exists promisified');
-                    return true;
-                } else {
-                    console.log('err: ', err);
-                    return false;
-                }
-            }
-        );*/
-
-        /*const isExistOld = access(
-            `${this.path}SampleCSVFile_2kb.csv`,
-            (err) => {
-                if(!err) {
-                    console.log('file exists old');
-                    return true;
-                } else {
-                    console.log('err: ', err);
-                    return false;
-                }
-            }
-        );*/
-        // console.log(`${this.path}SampleCSVFile_2kb.csv`);
-        // console.log('is SampleCSVFile_2kb.csv exist: ', isExist);
-        // console.log('is SampleCSVFile_2kb.csv exist: ', isExistOld);
-        // console.log(this.isFileExist(`${this.path}SampleCSVFile_2k.csv`));
 
     }
 
@@ -144,6 +112,45 @@ export default class DirWatcher extends EventEmitter {
         }
 
         return file;
+    }
+
+    async experiments() {
+        console.log('-- experiments');
+        const fileNames = await readDirPromisified(this.path, { encoding: defaultEncoding });
+        console.log('-- fileNames: \n', fileNames);
+
+        // const stats = await statPromisified(`${this.path}sample.csv`);
+        // console.log('-- stats: ', stats);
+
+        const isExist = await accessPromisified(
+            `${this.path}sample.csv`,
+            (err) => {
+                if (!err) {
+                    console.log('file exists promisified');
+                    return true;
+                } else {
+                    console.log('err: ', err);
+                    return false;
+                }
+            }
+        );
+
+        /*const isExistOld = access(
+            `${this.path}SampleCSVFile_2kb.csv`,
+            (err) => {
+                if (!err) {
+                    console.log('file exists old');
+                    return true;
+                } else {
+                    console.log('err: ', err);
+                    return false;
+                }
+            }
+        );*/
+        console.log(`${this.path}sample.csv`);
+        console.log('is sample.csv exist: ', isExist);
+        // console.log('is sample.csv exist: ', isExistOld);
+        console.log(this.isFileExist(`${this.path}sample.csv`));
     }
 
     /**
