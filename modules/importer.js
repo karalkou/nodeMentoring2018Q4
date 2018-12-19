@@ -2,17 +2,12 @@ import { readFileSync } from "fs";
 import csv from "csvtojson";
 
 export default class Importer {
-    constructor() {
-        this.converter = csv();
-    }
-
     /**
      * Imports
      * @param path
      * @returns {Promise<Converter | *>}
      */
-    async import(path) {
-        // console.log('-- !!! IMPORT !!! --');
+    static async import(path) {
         return csv().fromFile(path); // if we use this.converter then we have an error like "write after end..." ???
     }
 
@@ -21,7 +16,7 @@ export default class Importer {
      * @param path
      * @returns {*|Converter}
      */
-    importSync(path) {
+    static importSync(path) {
         const data = readFileSync(
             path,
             {
@@ -29,6 +24,6 @@ export default class Importer {
             }
         );
 
-        return this.converter.fromString(data);
+        return csv().fromString(data);
     }
 }
