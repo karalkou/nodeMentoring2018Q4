@@ -1,4 +1,5 @@
 import { name, pathToWatch } from './config/index.json';
+import { DIR_WATCHER_CHANGED } from "./config/constants";
 import { User, Product } from './models/index';
 import { DirWatcher, Importer } from './modules';
 
@@ -11,8 +12,9 @@ new Product();
 
 const dirWatcher = new DirWatcher();
 
-dirWatcher.on('dirwatcher:changed', async (ev) => {
+dirWatcher.on(DIR_WATCHER_CHANGED, async (ev) => {
     const { type, file } = ev;
+    console.log('-- event type: ', type);
 
     if (type === "deleted") return;
 
@@ -20,4 +22,4 @@ dirWatcher.on('dirwatcher:changed', async (ev) => {
     console.log('-- data:\n', data);
 });
 
-dirWatcher.watch(pathToWatch, 2000);
+dirWatcher.watch(pathToWatch, 1000);

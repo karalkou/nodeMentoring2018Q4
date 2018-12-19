@@ -1,12 +1,13 @@
 import path from 'path';
 import { EventEmitter } from 'events';
-import { readdir, stat, access } from 'fs';
+import { readdir, stat } from 'fs';
 import { promisify } from 'util';
+
 import { defaultEncoding } from './../config/index.json';
+import { DIR_WATCHER_CHANGED, EVENT_TYPE_ADDED, EVENT_TYPE_DELETED, EVENT_TYPE_MODIFIED } from "../config/constants";
 
 const readDirPromisified = promisify(readdir);
 const statPromisified = promisify(stat);
-const accessPromisified = promisify(access);
 
 export default class DirWatcher extends EventEmitter {
     constructor() {
@@ -20,66 +21,54 @@ export default class DirWatcher extends EventEmitter {
     }
 
     /**
-     *
-     * @param path
-     * @param delay
+     * Watches given path with given delay
+     * @param path {string} - path to file
+     * @param delay {number} - delay to make check
      */
     async watch(path, delay) {
-        //console.log('* watch was inited');
         this.path = path;
         this.delay = delay;
 
-        // await this.startCheck();
-        this.experiments();
+        await this.startCheck();
     }
 
     /**
-     *
+     * Calls this.checkForChanges recursively with given delay or remove timer
      * @returns {Promise<void>}
      */
     async startCheck() {
-        //console.log('* startCheck was inited');
         try {
-            //console.log('* startCheck try');
             await this.checkForChanges();
             this.pollTimer = setTimeout(this.startCheck, this.delay);
         } catch (err) {
-            //console.log('* startCheck catch');
             console.error(err.message);
             this.destroy();
         }
     }
 
     /**
-     *
+     * Checks for changes
      * @returns {Promise<void>}
      */
     async checkForChanges() {
-        //console.log('* checkForChanges was inited');
-
         const fileNames = await readDirPromisified(this.path, { encoding: defaultEncoding });
-        //console.log('-- fileNames: \n', fileNames);
         const removedFiles = this.files.filter(file => !fileNames.includes(file.name));
-        // console.log('-- removedFiles: \n', removedFiles);
 
-        removedFiles.forEach(file => this.emit("dirwatcher:changed", { type: "deleted", file: file }));
+        removedFiles.forEach(file => this.emit(DIR_WATCHER_CHANGED, { type: EVENT_TYPE_DELETED, file: file }));
 
         this.files = await Promise.all(fileNames.map(this.handleFileStatus));
-        // console.log('-- this.files: \n', this.files);
-
     }
 
     /**
-     *
+     * Clears timeout
      */
     destroy() {
-        //console.log('* destroy was inited');
         clearTimeout(this.pollTimer);
     }
 
     /**
-     *
-     * @param fileName
+     * Handles file status and emits events dirwatcher:changed with types added/modified
+     * @param fileName - file name
      * @returns {Promise<*>}
      */
     async handleFileStatus(fileName) {
@@ -100,69 +89,17 @@ export default class DirWatcher extends EventEmitter {
                 path: path.join(this.path, fileName),
             };
 
-            this.emit("dirwatcher:changed", { type: "added", file: newFile });
+            this.emit(DIR_WATCHER_CHANGED, { type: EVENT_TYPE_ADDED, file: newFile });
 
             return newFile;
         }
 
         if (file.lastModified < stat.mtimeMs) {
-            this.emit("dirwatcher:changed", { type: "modified", file: file });
+            this.emit(DIR_WATCHER_CHANGED, { type: EVENT_TYPE_MODIFIED, file: file });
 
             file.lastModified = stat.mtimeMs;
         }
 
         return file;
-    }
-
-    async experiments() {
-        console.log('-- experiments');
-        const fileNames = await readDirPromisified(this.path, { encoding: defaultEncoding });
-        console.log('-- fileNames: \n', fileNames);
-
-        // const stats = await statPromisified(`${this.path}sample.csv`);
-        // console.log('-- stats: ', stats);
-
-        const isExist = await accessPromisified(
-            `${this.path}sample.csv`,
-            (err) => {
-                if (!err) {
-                    console.log('file exists promisified');
-                    return true;
-                } else {
-                    console.log('err: ', err);
-                    return false;
-                }
-            }
-        );
-
-        /*const isExistOld = access(
-            `${this.path}SampleCSVFile_2kb.csv`,
-            (err) => {
-                if (!err) {
-                    console.log('file exists old');
-                    return true;
-                } else {
-                    console.log('err: ', err);
-                    return false;
-                }
-            }
-        );*/
-        console.log(`${this.path}sample.csv`);
-        console.log('is sample.csv exist: ', isExist);
-        // console.log('is sample.csv exist: ', isExistOld);
-        console.log(this.isFileExist(`${this.path}sample.csv`));
-    }
-
-    /**
-     *
-     * @param path
-     * @returns {string}
-     */
-    isFileExist(path) {
-        let result = '';
-        access(path, err => {
-            result = !err
-        });
-        return result;
     }
 }
