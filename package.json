@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "commander": "^2.19.0",
-    "csvtojson": "^2.0.8"
+    "csvtojson": "^2.0.8",
+    "through2": "^3.0.0"
   }
 }
