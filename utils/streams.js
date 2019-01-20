@@ -20,7 +20,8 @@ if (hasHelpArg(args) && !isHelpArg(args[0])) {
 program
     .version('0.1.0')
     .option('-a, --action <type>', 'action type')
-    .option('-f, --file [path]', 'set the path to file');
+    .option('-f, --file [path]', 'set the path to file')
+    .option('-p, --path <path>', 'set the path to folder');
 
 program.on('--help', function () {
     console.log('Would you mind to help me, sir?');
@@ -29,7 +30,7 @@ program.on('--help', function () {
 program.parse(process.argv);
 
 
-const { action, file } = program;
+const { action, file, path } = program;
 
 if (action) {
     actionOptionHandler(action)
@@ -55,6 +56,10 @@ function actionOptionHandler(arg) {
         }
         case 'convertToFile': {
             convertToFile(file);
+            break;
+        }
+        case 'cssBundler': {
+            cssBundler(path);
             break;
         }
         default: {
@@ -98,6 +103,11 @@ function outputFile(filePath) {
 }
 
 function convertFromFile(filePath) {
+    if (!/csv$/.test(filePath)) {
+        console.log('Wrong file path');
+        return;
+    }
+
     csv().fromFile(filePath)
         .then((res) => {
             console.log(res);
@@ -119,6 +129,24 @@ function convertToFile(filePath) {
         });
 }
 
+function cssBundler(path) {
+    const writer = fs.createWriteStream(`${path}/bundle.css`);
+
+    fs.readdir(path, (err, fileNames) => {
+        if (err) {
+            console.log('ERROR');
+            return;
+        }
+
+        fileNames.forEach((file) => {
+            const pathToFile = `${path}/${file}`;
+
+            fs.readFile(pathToFile, (err, res) => {
+                writer.write(`${res}\n`);
+            });
+        })
+    });
+}
 
 /*--------------------------------------------------*/
 
