@@ -1,5 +1,20 @@
 const program = require('commander');
 
+
+let args = process.argv.slice(2);
+const helpRegExp = /^(-h|--help)$/;
+
+// Checks whether any command is provided and output help if no
+if (!args.length) {
+    console.log('No inputs found!');
+    program.outputHelp();
+}
+
+// Ignores --help option if other options were passed before
+if (hasHelpArg(args) && !isHelpArg(args[0])) {
+    process.argv = process.argv.filter(arg => !isHelpArg(arg));
+}
+
 program
     .version('0.1.0')
     .option('-a, --action <type>', 'action type')
@@ -14,7 +29,7 @@ program.parse(process.argv);
 console.log('program: ', program);
 console.log('-----------------------------------------');
 
-const {help, action, file} = program;
+const { help, action, file } = program;
 
 console.log('help: ', help);
 console.log('action: ', action);
@@ -43,4 +58,17 @@ function convertFromFile(filePath) {
 
 function convertToFile(filePath) {
     console.log('convertToFile', filePath);
+}
+
+
+/*--------------------------------------------------*/
+
+/*------------------- helpers ----------------------*/
+
+function isHelpArg(arg) {
+    return helpRegExp.test(arg);
+}
+
+function hasHelpArg(arr) {
+    return arr.some(curVal => isHelpArg(curVal));
 }
