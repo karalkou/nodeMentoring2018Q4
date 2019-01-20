@@ -26,26 +26,47 @@ program.on('--help', function () {
 
 program.parse(process.argv);
 
-console.log('program: ', program);
-console.log('-----------------------------------------');
 
-const { help, action, file } = program;
+if (program.action) {
+    actionOptionHandler(program.action)
+}
 
-console.log('help: ', help);
-console.log('action: ', action);
-console.log('file: ', file);
-
-function actionHandler(arg) {
-    console.log('--- actionHandler', arg);
+function actionOptionHandler(arg) {
+    switch (arg) {
+        case 'reverse': {
+            reverse();
+            break;
+        }
+        case 'transform': {
+            transform();
+            break;
+        }
+        default: {
+            console.log('ERROR');
+        }
+    }
 }
 
 
-function reverse(str) {
-    console.log('reverse', str);
+function reverse() {
+    process.stdin.on('data', data => {
+        const reversedStr = convertBufferToString(data)
+            .split('')
+            .reverse()
+            .join('');
+
+        process
+            .stdout
+            .write(`${reversedStr}\n`);
+    });
 }
 
-function transform(str) {
-    console.log('transform', str);
+function transform() {
+    process.stdin.on('data', data => {
+        const upperCaseStr = convertBufferToString(data).toUpperCase();
+
+        process.stdout.write(`${upperCaseStr}\n`);
+    });
 }
 
 function outputFile(filePath) {
@@ -71,4 +92,8 @@ function isHelpArg(arg) {
 
 function hasHelpArg(arr) {
     return arr.some(curVal => isHelpArg(curVal));
+}
+
+function convertBufferToString(buffer) {
+    return buffer.toString().trim();
 }
