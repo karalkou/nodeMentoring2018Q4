@@ -1,4 +1,6 @@
 const program = require('commander');
+const fs = require('fs');
+const csv = require('csvtojson');
 
 
 let args = process.argv.slice(2);
@@ -27,8 +29,10 @@ program.on('--help', function () {
 program.parse(process.argv);
 
 
-if (program.action) {
-    actionOptionHandler(program.action)
+const { action, file } = program;
+
+if (action) {
+    actionOptionHandler(action)
 }
 
 function actionOptionHandler(arg) {
@@ -39,6 +43,18 @@ function actionOptionHandler(arg) {
         }
         case 'transform': {
             transform();
+            break;
+        }
+        case 'outputFile': {
+            outputFile(file);
+            break;
+        }
+        case 'convertFromFile': {
+            convertFromFile(file);
+            break;
+        }
+        case 'convertToFile': {
+            convertToFile(file);
             break;
         }
         default: {
@@ -70,15 +86,37 @@ function transform() {
 }
 
 function outputFile(filePath) {
-    console.log('outputFile', filePath);
+    const reader = fs.createReadStream(filePath);
+
+    reader.on('readable', () => {
+        const buffer = reader.read();
+
+        if (buffer) {
+            process.stdout.write(convertBufferToString(buffer));
+        }
+    });
 }
 
 function convertFromFile(filePath) {
-    console.log('convertFromFile', filePath);
+    csv().fromFile(filePath)
+        .then((res) => {
+            console.log(res);
+        });
 }
 
 function convertToFile(filePath) {
-    console.log('convertToFile', filePath);
+    if (!/csv$/.test(filePath)) {
+        console.log('Wrong file path');
+        return;
+    }
+
+    const path = filePath.replace('csv', 'json');
+    const writer = fs.createWriteStream(path);
+
+    csv().fromFile(filePath)
+        .then((res) => {
+            writer.write(JSON.stringify(res));
+        });
 }
 
 
