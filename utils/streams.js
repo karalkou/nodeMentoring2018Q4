@@ -1,6 +1,9 @@
 const program = require('commander');
 const fs = require('fs');
+const nodePath = require('path');
 const csv = require('csvtojson');
+const through2 = require('through2');
+const CombinedStream = require('combined-stream');
 
 
 let args = process.argv.slice(2);
@@ -70,16 +73,15 @@ function actionOptionHandler(arg) {
 
 
 function reverse() {
-    process.stdin.on('data', data => {
-        const reversedStr = convertBufferToString(data)
-            .split('')
-            .reverse()
-            .join('');
+    const reverseStr = str => str.split('').reverse().join('');
 
-        process
-            .stdout
-            .write(`${reversedStr}\n`);
-    });
+    process.stdin
+        .pipe(through2(
+            (data, enc, cb) => (
+                cb(null, Buffer.from(reverseStr(data.toString())))
+            ))
+        )
+        .pipe(process.stdout);
 }
 
 function transform() {
@@ -130,7 +132,10 @@ function convertToFile(filePath) {
 }
 
 function cssBundler(path) {
-    const writer = fs.createWriteStream(`${path}/bundle.css`);
+    const BUNDLE_NAME = 'bundle.css';
+    const SAMPLE_CSS = 'nodejs18-hw3.css';
+
+    const combinedStream = CombinedStream.create();
 
     fs.readdir(path, (err, fileNames) => {
         if (err) {
@@ -139,12 +144,17 @@ function cssBundler(path) {
         }
 
         fileNames.forEach((file) => {
-            const pathToFile = `${path}/${file}`;
+            const filename = nodePath.basename(file);
+            if (filename === nodePath.basename(SAMPLE_CSS) || filename === BUNDLE_NAME) return;
 
-            fs.readFile(pathToFile, (err, res) => {
-                writer.write(`${res}\n`);
-            });
-        })
+            const stream = fs.createReadStream(`${path}/${file}`);
+            combinedStream.append(stream);
+        });
+
+        const stream = fs.createReadStream(`${path}/${SAMPLE_CSS}`);
+        combinedStream.append(stream);
+
+        combinedStream.pipe(fs.createWriteStream(`${path}/${BUNDLE_NAME}`));
     });
 }
 
@@ -163,3 +173,14 @@ function hasHelpArg(arr) {
 function convertBufferToString(buffer) {
     return buffer.toString().trim();
 }
+
+/*--------------------------------------------------*/
+
+/*------------------ questions ---------------------*/
+// 1. Я заюзал два разных подхода:
+//    а) в reverse - pipe
+//    б) в transform, etc. - просто располагаю внутри обработки 'data', и т.п.
+//   Как правильнее (точнее, что может вызвать больше сложностей)?
+// 2. Как сделать перевод строки после выполнения action в консоли?
+// 3. Строка 81 - cb(null, Buffer.from(reverseStr(data.toString()))). Можно обойтись и без Buffer.from. Зачем он?
+// 4. Как элегантнее реализовать cssBundler?
