@@ -216,4 +216,11 @@ Transform flow hint:
     
   // To convert a buffer to a string call `buffer.toString()`
   ```  
+
 ---
+
+## HOMEWORK 4
+### MIDDLEWARE. FRAMEWORKS
+#### Tasks
+1. In a separate directory (e.g. ​http-servers​) create three files called ​plain-text-server.js​​,html-server.js ​​and​ json-server.js​​ respectively. Implement basic ​http server​​ using ​httpmodule in each of them with the following requirements:
+   
