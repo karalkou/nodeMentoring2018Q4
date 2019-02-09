@@ -28,6 +28,7 @@
     "combined-stream": "^1.0.7",
     "commander": "^2.19.0",
     "csvtojson": "^2.0.8",
+    "express": "^4.16.4",
     "through2": "^3.0.0"
   }
 }
