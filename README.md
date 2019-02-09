@@ -222,7 +222,8 @@ Transform flow hint:
 ## HOMEWORK 4
 ### MIDDLEWARE. FRAMEWORKS
 #### Tasks
-1. In a separate directory (e.g. ​http-servers​) create three files called ​plain-text-server.js​​,html-server.js ​​and​ json-server.js​​ respectively. Implement basic ​http server​​ using ​httpmodule in each of them with the following requirements:
+1. In a separate directory (e.g. ​http-servers​) create three files called ​plain-text-server.js​​, html-server.js ​​and​ json-server.js​​ respectively. 
+Implement basic ​http server​​ using ​httpmodule in each of them with the following requirements:
     - For ​plain-text-server.js ​​file:
         1. Set ​Content-Type​​ header to​ plain text​.
         2. Send “Hello World” string as a response.
