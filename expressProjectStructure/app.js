@@ -12,8 +12,8 @@ router.route('/api/products')
         res.send('Return ​ ALL ​products')
     })
     .post(function (req, res) {
-    res.send('Add ​ NEW​ product and return it')
-});
+        res.send('Add ​ NEW​ product and return it')
+    });
 
 router.get('/api/:id', function (req, res) {
     res.send('Return ​ SINGLE​ product')

@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Blue T-Shirt",
+        "brand": "Blue brand",
+        "price": 99.99,
+        "options": [
+            {
+                "color": "blue"
+            },
+            {
+                "size": "XL"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Black T-Shirt",
+        "brand": "Black brand",
+        "price": 99.99,
+        "options": [
+            {
+                "color": "black"
+            },
+            {
+                "size": "XL"
+            }
+        ]
+    }
+]
