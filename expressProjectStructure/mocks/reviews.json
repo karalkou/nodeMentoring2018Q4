@@ -1,0 +1,16 @@
+[
+    {
+        "product_id": 1,
+        "urls": [
+            "http://www.abracadabra.com/a1",
+            "http://www.abracadabra.com/a2"
+        ]
+    },
+    {
+        "product_id": 2,
+        "urls": [
+            "http://www.abracadabra.com/a1",
+            "http://www.abracadabra.com/a2"
+        ]
+    }
+]
