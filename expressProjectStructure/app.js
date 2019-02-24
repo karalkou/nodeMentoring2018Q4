@@ -4,11 +4,16 @@ const { readFile } = require('fs');
 const { promisify } = require('util');
 const bodyParser = require('body-parser');
 const dataProvider = require('./controllers/data-provider/index.js');
+const authProvider = require('./controllers/auth-provider/index.js');
 
 const readFileAsync = promisify(readFile);
 
 const app = express();
 const router = express.Router();
+
+app.use(bodyParser.json());
+
+app.use('/', router);
 
 router.get('/', function (req, res) {
     readFileAsync(path.resolve(__dirname, './index.html'))
@@ -23,8 +28,6 @@ router.get('/', function (req, res) {
         })
         .catch(err => console.error(err));
 });
-
-app.use(bodyParser.urlencoded());
 
 router.route('/api/products')
     .get(function (req, res) {
@@ -47,7 +50,7 @@ router.get('/api/users', function (req, res) {
     respond(dataProvider.readUsers(), res);
 });
 
-app.use('/', router);
+router.post('/auth', authProvider.login);
 
 module.exports = app;
 
