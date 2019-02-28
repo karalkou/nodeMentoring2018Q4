@@ -3,9 +3,12 @@ const path = require('path');
 const { readFile } = require('fs');
 const { promisify } = require('util');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 const dataProvider = require('./controllers/data-provider/index.js');
-const authProvider = require('./controllers/auth-provider/index.js');
-const { checkToken } = require('./middlewares/checkJWTToken');
+// const authProvider = require('./controllers/auth-provider/index.js');
+const passportLocal = require('./helpers/passportLocal');
+const checkToken = require('./middlewares/checkJWTToken');
+const { JWTSecret } = require("./config/consts");
 
 const readFileAsync = promisify(readFile);
 
@@ -17,7 +20,32 @@ app.use(bodyParser.json());
 
 app.use('/', router);
 
-router.post('/auth', authProvider.login);
+//-- JWT authentication
+// router.post('/auth', authProvider.login);
+
+//-- passportJS authentication
+router.post('/auth', passportLocal.authenticate('local', { session: false }), (req, res, next) => {
+    const { user } = req;
+    const payload = {
+        sub: user.id,
+        userName: user.userName
+    };
+    const token = jwt.sign(payload, JWTSecret, { expiresIn: 10000, });
+
+    res
+        .status(200)
+        .json({
+            code: 200,
+            message: 'OK',
+            data: {
+                user: {
+                    email: req.user.email,
+                    username: req.user.userName
+                }
+            },
+            token
+        });
+});
 
 router.get('/', function (req, res) {
     readFileAsync(path.resolve(__dirname, './index.html'))
