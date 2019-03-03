@@ -23,7 +23,8 @@
     {
         "id": 6,
         "name": "George",
-        "email":  "George@belmail.com",
+        "displayName": "Yury Karalkou",
+        "email":  "yury.karalkou@gmail.com",
         "userName": "GeorgioRegani",
         "password": "78"
     }

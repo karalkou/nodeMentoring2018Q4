@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const dataProvider = require('./controllers/data-provider/index.js');
 // const authProvider = require('./controllers/auth-provider/index.js');
-const passportLocal = require('./helpers/passportLocal');
+const passportConfigured = require('./helpers/passportLocal');
 const checkToken = require('./middlewares/checkJWTToken');
 const { JWTSecret } = require("./config/consts");
 
@@ -24,29 +24,54 @@ app.use('/', router);
 // router.post('/auth', authProvider.login);
 
 //-- passportJS authentication
-router.post('/auth', passportLocal.authenticate('local', { session: false }), (req, res, next) => {
-    const { user } = req;
-    const payload = {
-        sub: user.id,
-        userName: user.userName
-    };
-    const token = jwt.sign(payload, JWTSecret, { expiresIn: 10000, });
+//--- Local Strategy
+router.post('/auth',
+    passportConfigured.authenticate('local', { session: false }),
+    (req, res, next) => {
+        const { user } = req;
+        const payload = {
+            sub: user.id,
+            userName: user.userName
+        };
+        const token = jwt.sign(payload, JWTSecret, { expiresIn: 10000, });
 
-    res
-        .status(200)
-        .json({
-            code: 200,
-            message: 'OK',
-            data: {
-                user: {
-                    email: req.user.email,
-                    username: req.user.userName
-                }
-            },
-            token
-        });
-});
+        res
+            .status(200)
+            .json({
+                code: 200,
+                message: 'OK',
+                data: {
+                    user: {
+                        email: req.user.email,
+                        username: req.user.userName
+                    }
+                },
+                token
+            });
+    });
 
+//--- Facebook Strategy
+router.get('/auth/facebook',
+    passportConfigured.authenticate('facebook', {
+        session: false,
+    }));
+
+router.get("/auth/facebook/callback",
+    passportConfigured.authenticate('facebook', {
+        session: false,
+    }),
+    (req, res, next) => {
+        /*res
+            .status(200)
+            .json({
+                code: 200,
+                message: 'OK'
+            })*/
+        res.redirect('/api1/products');
+
+    });
+
+//-- Usual api routes
 router.get('/', function (req, res) {
     readFileAsync(path.resolve(__dirname, './index.html'))
         .then(data => {
@@ -60,6 +85,11 @@ router.get('/', function (req, res) {
         })
         .catch(err => console.error(err));
 });
+
+router.route('/api1/products')
+    .get(function (req, res) {
+        respond(dataProvider.readProducts(), res);
+    });
 
 router.route('/api/products')
     .get(checkToken, function (req, res) {
