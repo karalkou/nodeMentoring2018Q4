@@ -4,10 +4,8 @@ const { readFile } = require('fs');
 const { promisify } = require('util');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const dataProvider = require('./controllers/data-provider/index.js');
 // const authProvider = require('./controllers/auth-provider/index.js');
 const passportConfigured = require('./helpers/passportLocal');
-const checkToken = require('./middlewares/checkJWTToken');
 const { JWTSecret } = require("./config/consts");
 
 const readFileAsync = promisify(readFile);
@@ -67,6 +65,7 @@ router.get("/auth/facebook/callback",
                 code: 200,
                 message: 'OK'
             })*/
+        console.log('-- req.body: ', req.body);
         res.redirect('/api1/products');
 
     });
@@ -86,43 +85,14 @@ router.get('/', function (req, res) {
         .catch(err => console.error(err));
 });
 
-router.route('/api1/products')
-    .get(function (req, res) {
-        respond(dataProvider.readProducts(), res);
-    });
+/*----------------------------------------------------------------------*/
 
-router.route('/api/products')
-    .get(checkToken, function (req, res) {
-        respond(dataProvider.readProducts(), res);
-    })
-    .post(checkToken, function (req, res) {
-        console.log('-- req.body: ', req.body);
-        respond(dataProvider.addProduct(req.body), res);
-    });
+const productsRouter = require('./routes/api/v1/products');
+app.use('/api/v1/products', productsRouter);
 
-router.get('/api/products/:id', checkToken, function (req, res) {
-    respond(dataProvider.readProductById(req.params.id), res);
-});
+const usersRouter = require('./routes/api/v1/products');
+app.use('/api/v1/users', usersRouter);
 
-router.get('/api/products/:id/reviews', checkToken, function (req, res) {
-    respond(dataProvider.findProductReviews(req.params.id), res);
-});
-
-router.get('/api/users', checkToken, function (req, res) {
-    respond(dataProvider.readUsers(), res);
-});
+/*----------------------------------------------------------------------*/
 
 module.exports = app;
-
-function respond(data, res) {
-    if (data === 400) {
-        res.writeHead(400);
-        res.end('400 Bad request');
-    } else if (!data) {
-        res.writeHead(404);
-        res.end('404 Not found');
-    } else {
-        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf8' });
-        res.end(JSON.stringify(data));
-    }
-}
