@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const dataProvider = require('./../../../../controllers/data-provider/index.js');
+const dataProvider = require('../../../../helpers/data-provider/index.js');
 const checkToken = require('./../../../../middlewares/checkJWTToken');
 const { respond } = require("../../helpers");
 

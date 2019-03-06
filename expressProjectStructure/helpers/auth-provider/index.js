@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { JWTSecret } = require("../../config/consts");
-const users = require('./../../mocks/users');
+const users = require('../../mocks/users');
 
 module.exports.login = (req, res) => {
     const { body: { userName, password } } = req;
