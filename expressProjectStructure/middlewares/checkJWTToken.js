@@ -1,8 +1,11 @@
 const jwt = require("jsonwebtoken");
+const querystring = require('querystring');
 const { JWTSecret } = require("../config/consts");
 
 function checkToken(req, res, next) {
-    let token = req.headers['x-access-token'] || req.headers['authorization'];
+    const urlParams = querystring.parse(req.url.split('?')[1]);
+
+    let token = req.headers['x-access-token'] || req.headers['authorization'] || urlParams.token;
 
     if (token && token.startsWith('Bearer ')) {
         // Remove Bearer from string

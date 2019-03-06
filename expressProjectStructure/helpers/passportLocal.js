@@ -27,9 +27,6 @@ passport.use(
             callbackURL: facebookPassport.callback
         },
         (accessToken, refreshToken, profile, cb) => {
-            console.log("-- accessToken", accessToken);
-            console.log("-- refreshToken", refreshToken);
-            console.log("-- profile", profile);
             let user = users.find(user => user.displayName === profile.displayName);
 
             if (!user) {

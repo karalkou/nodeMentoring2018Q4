@@ -50,7 +50,7 @@ router.get('/', function (req, res) {
 const productsRouter = require('./routes/api/v1/products');
 app.use('/api/v1/products', productsRouter);
 
-const usersRouter = require('./routes/api/v1/products');
+const usersRouter = require('./routes/api/v1/users');
 app.use('/api/v1/users', usersRouter);
 
 module.exports = app;
