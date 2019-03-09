@@ -29,6 +29,10 @@ app.use('/api/v1/auth/', passportLocalRouter);
 const passportFacebookRouter = require('./routes/api/v1/auth/facebook');
 app.use('/api/v1/auth/', passportFacebookRouter);
 
+//--- passportJS authentication: Google OAuth2 Strategy
+const passportGoogleRouter = require('./routes/api/v1/auth/google');
+app.use('/api/v1/auth/', passportGoogleRouter);
+
 
 // -------------- Usual api routes ----------------
 // ------------------------------------------------

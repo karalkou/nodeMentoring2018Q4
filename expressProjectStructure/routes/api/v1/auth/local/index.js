@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const { JWTSecret } = require("./../../../../../config/consts");
-const passportConfigured = require('./../../../../../helpers/passportLocal.js');
+const passportConfigured = require('./../../../../../helpers/passportConfigured.js');
 
 router.post('/local',
     passportConfigured.authenticate('local', { session: false }),
