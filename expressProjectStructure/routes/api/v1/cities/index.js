@@ -2,22 +2,22 @@ const express = require('express');
 const router = express.Router();
 // const dataProvider = require('../../../../helpers/data-provider/index.js');
 // const checkToken = require('./../../../../middlewares/checkJWTToken');
-const MongoClient = require('mongodb').MongoClient;
-const { url: mongoUrl } = require('./../../../../config/db');
 const { respond } = require("../../helpers");
+const { dbName } = require("../../../../config/db");
 
-// Use connect method to connect to the Server
-MongoClient.connect(mongoUrl, {}, function (err, client) {
-    if (err) {
-        return console.log(err);
-    }
-    // взаимодействие с базой данных
-    client.close();
-});
+const db = require('./../../../../database/db');
 
 router.route('/')
     .get(/*checkToken, */function (req, res) {
-        // respond(dataProvider.readProducts(), res);
+        db
+            .get()
+            .db(dbName)
+            .collection("cities")
+            .aggregate([{ $sample: { size: 1 } }])
+            .toArray()
+            .then(cities => {
+                respond(cities, res);
+            })
     })
     .post(/*checkToken, */function (req, res) {
         console.log('-- req.body: ', req.body);
