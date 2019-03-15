@@ -12,4 +12,14 @@ module.exports = {
         clientSecret: "5Zb7EV_4jxCREtZsVmEsc7Ap",
         callbackURL: "http://localhost:9001/api/v1/auth/google/callback"
     },
+    mongo: {
+        url: 'mongodb://localhost',
+        port: 27017,
+        dbName: 'nodementoring',
+        collectionsToModelMap: {
+            cities: 'City',
+            users: 'Users',
+            products: 'Product'
+        }
+    }
 };
