@@ -1,29 +1,36 @@
 // city.js
 const mongoose = require('mongoose');
+const { mongo: { collectionsToModelMap } } = require('./../../config/consts');
+const timestampPlugin = require('./plugins/timestamp');
 
 const citySchema = mongoose.Schema({
     name: {
-        required: [true, 'Name is required'],
         type: String,
+        lowercase: true,
+        required: [true, 'Name is required'],
     },
     country: {
-        required: [true, 'Country is required'],
         type: String,
+        lowercase: true,
+        required: [true, 'Country is required'],
     },
     capital: {
-        required: [true, 'isCapital is required'],
         type: Boolean,
+        lowercase: true,
+        required: [true, 'isCapital is required'],
     },
     location: {
         lat: {
-            required: [true, 'Latitude is required'],
             type: String,
+            required: [true, 'Latitude is required'],
         },
         long: {
-            required: [true, 'Longitude is required'],
             type: String,
+            required: [true, 'Longitude is required'],
         },
     },
 });
 
-module.exports = mongoose.model('City', citySchema);
+citySchema.plugin(timestampPlugin);
+
+module.exports = mongoose.model(collectionsToModelMap.cities, citySchema);

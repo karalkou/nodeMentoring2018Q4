@@ -18,7 +18,7 @@ module.exports = {
         dbName: 'nodementoring',
         collectionsToModelMap: {
             cities: 'City',
-            users: 'Users',
+            users: 'User',
             products: 'Product'
         }
     }

@@ -1,23 +1,29 @@
 // product.js
 const mongoose = require('mongoose');
+const { mongo: { collectionsToModelMap } } = require('./../../config/consts');
+const timestampPlugin = require('./plugins/timestamp');
 
 const productSchema = new mongoose.Schema({
     name: {
-        required: [true, 'Product name is required'],
         type: String,
+        lowercase: true,
+        required: [true, 'Product name is required'],
     },
     color: {
-        required: [true, 'Product color is required'],
         type: String,
+        lowercase: true,
+        required: [true, 'Product color is required'],
     },
     isFavorite: {
-        required: [true, 'Product isFavorite is required'],
         type: Boolean,
+        required: [true, 'Product isFavorite is required'],
     },
     reviews: {
-        min: [0, 'Reviews must be a positive number'],
         type: Number,
+        min: [0, 'Reviews must be a positive number'],
     },
 });
 
-module.exports = mongoose.model('Product', productSchema);
+productSchema.plugin(timestampPlugin);
+
+module.exports = mongoose.model(collectionsToModelMap.products, productSchema);
