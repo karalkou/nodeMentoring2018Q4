@@ -1,35 +1,46 @@
 const express = require('express');
 const router = express.Router();
-// const dataProvider = require('../../../../helpers/data-provider/index.js');
-// const checkToken = require('./../../../../middlewares/checkJWTToken');
-const { respond } = require("../../helpers");
-const { dbName } = require("../../../../config/db");
+const CityModel = require('./../../../../database/models/city');
+const { createNotFindByIdError, createDBError } = require("./../../../../helpers/errorCreators");
+const checkToken = require('./../../../../middlewares/checkJWTToken');
 
-const db = require('./../../../../database/db');
-
-router.route('/')
-    .get(/*checkToken, */function (req, res) {
-        db
-            .get()
-            .db(dbName)
-            .collection("cities")
-            .aggregate([{ $sample: { size: 1 } }])
-            .toArray()
-            .then(cities => {
-                respond(cities, res);
-            })
-    })
-    .post(/*checkToken, */function (req, res) {
-        console.log('-- req.body: ', req.body);
-        // respond(dataProvider.addProduct(req.body), res);
-    });
-
-router.get('/:id',/* checkToken, */function (req, res) {
-    // respond(dataProvider.readProductById(req.params.id), res);
+router.get('/', checkToken, (req, res, next) => {
+    CityModel.find({})
+        .then(cities => res.json(cities))
+        .catch(() => next(createDBError()));
 });
 
-router.get('/:id/reviews',/* checkToken, */function (req, res) {
-    // respond(dataProvider.findProductReviews(req.params.id), res);
+router.post('/', checkToken, (req, res, next) => {
+    new CityModel(req.body)
+        .save()
+        .then(city => res.json(city))
+        .catch(() => next(createDBError()));
+});
+
+router.delete('/:id', checkToken, (req, res, next) => {
+    CityModel.findByIdAndDelete(req.params.id)
+        .then(city => {
+            if (city) {
+                res.json(city);
+            } else {
+                next(createNotFindByIdError('city', req.params.id));
+            }
+        })
+        .catch(() => next(createDBError()));
+});
+
+router.put('/:id', checkToken, (req, res, next) => {
+    const { params, body } = req;
+
+    CityModel.findByIdAndUpdate(params.id, body, { new: true, upsert: true })
+        .then(city => {
+            if (city) {
+                res.json(city);
+            } else {
+                next(createNotFindByIdError('city', req.params.id));
+            }
+        })
+        .catch(() => next(createDBError()));
 });
 
 module.exports = router;
