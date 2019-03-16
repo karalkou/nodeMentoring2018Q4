@@ -24,7 +24,15 @@
 
 <form action="/api/v1/products" method="post">
     <input type="text" name="name" value="Some product" required><br>
-    <input type="text" name="brand" value="Some brand" required><br>
+    <input type="text" name="color" value="Some color" required><br>
+    <label>
+        <input type="radio" name="isFavorite" value="true" checked required>
+        is favorite
+    </label><br>
+    <label>
+        <input type="radio" name="isFavorite" value="false" required>
+        not favorite
+    </label><br>
     <button type="submit">Add product</button>
 </form>
 </body>
