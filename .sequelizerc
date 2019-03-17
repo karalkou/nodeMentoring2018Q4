@@ -1,0 +1,8 @@
+var path = require('path');
+
+module.exports = {
+  'config': path.resolve('./expressProjectStructure/config/', 'sequelize-config.json'),
+  'migrations-path': path.resolve('./expressProjectStructure/database_sql/', 'migrations'),
+  'models-path': path.resolve('./expressProjectStructure/database_sql/', 'models'),
+  'seeders-path': path.resolve('./expressProjectStructure/database_sql/', 'seeders')
+}

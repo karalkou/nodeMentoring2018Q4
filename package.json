@@ -36,6 +36,10 @@
     "passport-google-oauth2": "^0.2.0",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
+    "pg": "^7.8.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^2.1.0",
     "through2": "^3.0.0"
   }
 }
