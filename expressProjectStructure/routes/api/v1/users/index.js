@@ -1,11 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const dataProvider = require('../../../../helpers/data-provider/index.js');
 const checkToken = require('./../../../../middlewares/checkJWTToken');
-const { respond } = require("../../helpers");
+const models = require('./../../../../database_sql/models');
+
+const { User } = models;
 
 router.get('/', checkToken, function (req, res) {
-    respond(dataProvider.readUsers(), res);
+    User.findAll({})
+        .then(users => res.json(users))
+        .catch(() => res
+            .status(400)
+            .json({
+                status: 400,
+                message: 'Something went wrong, try again',
+            }));
 });
 
 module.exports = router;
