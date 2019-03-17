@@ -6,12 +6,12 @@ const models = require('./../../../../database_sql/models');
 const { Product } = models;
 
 router.route('/')
-    .get(/*checkToken, */function (req, res, next) {
+    .get(checkToken, (req, res, next) => {
         Product.findAll({})
             .then(products => res.json(products))
             .catch(() => next());
     })
-    .post(/*checkToken, */function (req, res, next) {
+    .post(checkToken, (req, res, next) => {
         console.log('-- req.body: ', req.body);
         const newProduct = {
             color: req.body.color || null,
@@ -25,7 +25,7 @@ router.route('/')
             .catch(() => next());
     });
 
-router.get('/:id', /*checkToken, */function (req, res, next) {
+router.get('/:id', checkToken, (req, res, next) => {
     Product.findByPk(req.params.id)
         .then(product => {
             if (product) {
@@ -40,7 +40,7 @@ router.get('/:id', /*checkToken, */function (req, res, next) {
         .catch(() => next());
 });
 
-router.get('/:id/reviews', /*checkToken, */function (req, res, next) {
+router.get('/:id/reviews', checkToken, (req, res, next) => {
     Product.findByPk(req.params.id)
         .then(product => {
             if (product) {
