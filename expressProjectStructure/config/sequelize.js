@@ -1,5 +1,5 @@
-export default [
-    'nodejs-mentoring',
+module.exports = [
+    'nodejs-mentoring_sql',
     'postgres',
     'postgres',
     {

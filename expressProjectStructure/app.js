@@ -3,11 +3,21 @@ const path = require('path');
 const { readFile } = require('fs');
 const { promisify } = require('util');
 const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
+const sequelizeConfig = require('./config/sequelize');
+const DBInit = require("./helpers/database_sql");
 
 const readFileAsync = promisify(readFile);
 
 const app = express();
 const router = express.Router();
+
+const sequelize = new Sequelize(...sequelizeConfig);
+
+sequelize
+    .authenticate()
+    .then(() => DBInit(sequelize))
+    .catch(err => console.log(err));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

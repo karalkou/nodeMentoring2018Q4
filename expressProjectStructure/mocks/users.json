@@ -1,31 +1,102 @@
 [
     {
-        "id": 0,
+        "id": "0",
+        "age": 32,
         "name": "Alex",
         "email": "alexCoder@belmail.com",
         "userName": "alexCoder",
-        "password": "12"
+        "password": "12",
+        "company": "wonderland"
     },
     {
-        "id": 2,
+        "id": "2",
+        "age": 33,
         "name": "Tony",
         "email":  "TonyWinters@belmail.com",
         "userName": "TonyWinters",
-        "password": "34"
+        "password": "34",
+        "company": "wonderland"
     },
     {
-        "id": 4,
+        "id": "4",
+        "age": 27,
         "name": "Verelle",
         "email":  "Verelle@belmail.com",
         "userName": "VerelleLeBorisse",
-        "password": "56"
+        "password": "56",
+        "company": "wonderland"
     },
     {
-        "id": 6,
+        "id": "6",
+        "age": 28,
         "name": "George",
         "displayName": "Yury Karalkou",
         "email":  "yury.karalkou@gmail.com",
         "userName": "GeorgioRegani",
-        "password": "78"
+        "password": "78",
+        "company": "wonderland"
+    },
+    {
+        "id": "7",
+        "age": 1,
+        "name": "admin",
+        "email": "admin@gmail.com",
+        "password": "admin",
+        "company": "admin"
+    },
+    {
+        "id": "8",
+        "age": 30,
+        "name": "Brewer Hendrix",
+        "email": "brewerhendrix@gmail.com",
+        "password": "password",
+        "company": "QUANTASIS"
+    },
+    {
+        "id": "9",
+        "age": 21,
+        "name": "Christy Hodges",
+        "email": "christyhodges@gmail.com",
+        "password": "password",
+        "company": "MONDICIL"
+    },
+    {
+        "id": "10",
+        "age": 31,
+        "name": "Gwen Velasquez",
+        "email": "gwenvelasquez@gmail.com",
+        "company": "ZENOLUX"
+    },
+    {
+        "id": "11",
+        "age": 30,
+        "name": "Ellis Goodwin",
+        "email": "ellisgoodwin@gmail.com",
+        "password": "password",
+        "company": "BUNGA"
+    },
+    {
+        "id": "12",
+        "age": 30,
+        "name": "Cindy Dejesus",
+        "email": "cindydejesus@gmail.com",
+        "password": "password",
+        "company": "SNACKTION"
+    },
+    {
+        "id": "13",
+        "age": 23,
+        "name": "Teresa Merrill",
+        "email": "teresamerrill@gmail.com",
+        "password": "password",
+        "company": "PROGENEX"
+    },
+    {
+        "id": "14",
+        "age": 34,
+        "name": "Estelle Freeman",
+        "email": "estellefreeman@gmail.com",
+        "password": "password",
+        "company": "TOYLETRY"
     }
 ]
