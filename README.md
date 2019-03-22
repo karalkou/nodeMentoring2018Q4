@@ -405,3 +405,29 @@ current date for every created/updated item (every ​**PUT** ​and ​**POST**
 5. All routes (including additional) return data from database with extra field added
 automatically on creation/update (​ task​​ 11-12​ ).
 
+---
+
+## HOMEWORK 8
+### SWAGGER.DOCS
+#### Tasks
+1. Navigate to **​SwaggerHub**​​ and create your personal account here.
+2. Create new API with OpenAPI version 2.0.
+3. Create API documentation for all implemented routes from prerequisites. Make sure thatyour documentation contains following information:
+    1. name and description for every tag;
+    2. name, description, example value and model for every parameter;
+    3. all required parameter should be marked appropriately;
+    4. code and description for all possible responses;
+    5. definitions of all used models with refs set to them.
+4. Export (download) your API as YAML file.
+5. Install *​swagger* ​package.
+6. Create a new project based on the exported YAML file using ​**swagger**​ CLI.
+7. Edit your YAML using built in Swagger Editor so that your paths could use appropriatecontrollers for handling particular routes
+8. Implement routes handling logic from ​**Homework 7**​​in the corresponding controllers (alldata should be returned from the database).
+9. Run the project server and make sure that your API responds on all implementedendpoints.
+
+#### Evaluation Criteria
+1. Account and new API were created (​tasks 1-2​).
+2. API documentation partially covers some of required routes or contains not all requiredinformation (​tasks 3​).
+3. API documentation covers all required routes with all required information described, APIwas successfully exported as YAML file (​task 3-4​).
+4. Swagger was installed, project was created (​tasks 5-7​).
+5. Project server responds on all required endpoints and returns data from the database(​task​​8-9​).
