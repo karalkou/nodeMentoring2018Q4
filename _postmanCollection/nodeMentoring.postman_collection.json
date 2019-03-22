@@ -1,0 +1,774 @@
+{
+	"info": {
+		"_postman_id": "bf49aa1b-7608-4b8a-9de3-49d632d5f557",
+		"name": "nodeMentoring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "databases",
+			"item": [
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "NodeJS Mentoring /api/v1/products",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "NodeJS Mentoring /api/v1/products",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/x-www-form-urlencoded",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "shkarpetki",
+											"type": "text"
+										},
+										{
+											"key": "color",
+											"value": "white-red-white",
+											"type": "text"
+										},
+										{
+											"key": "isFavorite",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "reviews",
+											"value": "0",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "NodeJS Mentoring /api/v1/products /:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/products/5c8d17ba41bcd212f46ed173",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"5c8d17ba41bcd212f46ed173"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "NodeJS Mentoring /api/v1/products /:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/products/5c8d17ba41bcd212f46ed173",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"5c8d17ba41bcd212f46ed173"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "NodeJS Mentoring /api/v1/users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "NodeJS Mentoring /api/v1/users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "age",
+											"value": "28",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "George",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "george.g@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "company",
+											"value": "Home inc.",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "NodeJS Mentoring /api/v1/users/:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/users/5c8d1c367f870207d4ddbb73",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"5c8d1c367f870207d4ddbb73"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "cities",
+					"item": [
+						{
+							"name": "NodeJS Mentoring /api/v1/cities",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/cities",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"cities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "NodeJS Mentoring /api/v1/users Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Volgograd",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "Russia",
+											"type": "text"
+										},
+										{
+											"key": "capital",
+											"value": "false",
+											"type": "text"
+										},
+										{
+											"key": "location.lat",
+											"value": "123",
+											"type": "text"
+										},
+										{
+											"key": "location.long",
+											"value": "456",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/cities",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"cities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "NodeJS Mentoring /api/v1/cities/:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/cities/5c8d1fe92193b129ecee2568",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"cities",
+										"5c8d1fe92193b129ecee2568"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "NodeJS Mentoring /api/v1/users/:id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Minsk",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "Belarus",
+											"type": "text"
+										},
+										{
+											"key": "capital",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "location.lat",
+											"value": "53.9",
+											"type": "text"
+										},
+										{
+											"key": "location.long",
+											"value": "27.56667",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9001/api/v1/cities/5c8d05cd210f1627cce1b36e",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9001",
+									"path": [
+										"api",
+										"v1",
+										"cities",
+										"5c8d05cd210f1627cce1b36e"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "JWT lector's example",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"lastName\": \"Mullins\",\r\n\t\"firstName\": \"Gamble\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PassportJS lector's example",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"lastName\": \"Hurley\",\r\n    \"firstName\": \"Ilene\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/authenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NodeJS Mentoring JWT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userName\": \"alexCoder\",\r\n    \"password\": \"12\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/v1/auth/jwt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"jwt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NodeJS Mentoring passportJS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userName\": \"alexCoder\",\r\n    \"password\": \"12\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/v1/auth/local",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"local"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NodeJS Mentoring passportJS Facebook",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/v1/auth/facebook",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"facebook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NodeJS Mentoring /api/products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjAsInVzZXJOYW1lIjoiYWxleENvZGVyIiwiaWF0IjoxNTUxODkwMDQ0LCJleHAiOjE1NTE5MDAwNDR9.TRqRuahPhHRjEL6vXYMH46mu6zmKBU53nwgnUSPnsLY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9001/api/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
