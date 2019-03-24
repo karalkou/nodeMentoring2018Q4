@@ -412,7 +412,7 @@ automatically on creation/update (​ task​​ 11-12​ ).
 #### Tasks
 1. Navigate to **​SwaggerHub**​​ and create your personal account here.
 2. Create new API with OpenAPI version 2.0.
-3. Create API documentation for all implemented routes from prerequisites. Make sure thatyour documentation contains following information:
+3. Create API documentation for all implemented routes from prerequisites. Make sure that your document ation contains following information:
     1. name and description for every tag;
     2. name, description, example value and model for every parameter;
     3. all required parameter should be marked appropriately;
@@ -421,9 +421,9 @@ automatically on creation/update (​ task​​ 11-12​ ).
 4. Export (download) your API as YAML file.
 5. Install *​swagger* ​package.
 6. Create a new project based on the exported YAML file using ​**swagger**​ CLI.
-7. Edit your YAML using built in Swagger Editor so that your paths could use appropriatecontrollers for handling particular routes
-8. Implement routes handling logic from ​**Homework 7**​​in the corresponding controllers (alldata should be returned from the database).
-9. Run the project server and make sure that your API responds on all implementedendpoints.
+7. Edit your YAML using built in Swagger Editor so that your paths could use appropriate controllers for handling particular routes
+8. Implement routes handling logic from ​**Homework 7**​​in the corresponding controllers (all data should be returned from the database).
+9. Run the project server and make sure that your API responds on all implemented endpoints.
 
 #### Evaluation Criteria
 1. Account and new API were created (​tasks 1-2​).
