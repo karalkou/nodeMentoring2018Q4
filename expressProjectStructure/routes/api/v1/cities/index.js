@@ -13,7 +13,7 @@ router.get('/', checkToken, (req, res, next) => {
 router.post('/', checkToken, (req, res, next) => {
     new CityModel(req.body)
         .save()
-        .then(city => res.json(city))
+        .then(citiesList => res.json(citiesList))
         .catch(() => next(createDBError()));
 });
 

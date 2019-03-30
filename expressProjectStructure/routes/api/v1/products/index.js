@@ -5,12 +5,12 @@ const { createNotFindByIdError, createDBError } = require("./../../../../helpers
 const checkToken = require('./../../../../middlewares/checkJWTToken');
 
 router.route('/')
-    .get(checkToken, function (req, res) {
+    .get(/* checkToken, */ function (req, res) {
         ProductModel.find({})
             .then(products => res.json(products))
             .catch(() => next(createDBError()));
     })
-    .post(checkToken, function (req, res) {
+    .post(/* checkToken, */ function (req, res) {
         const { body: reqBody } = req;
         const newProduct = {
             ...reqBody,
@@ -23,7 +23,7 @@ router.route('/')
             .catch(() => next(createDBError()));
     });
 
-router.get('/:id', checkToken, function (req, res) {
+router.get('/:id', /* checkToken, */ function (req, res) {
     ProductModel.findById(req.params.id)
         .then(product => {
             if (product) {
@@ -35,7 +35,7 @@ router.get('/:id', checkToken, function (req, res) {
         .catch(() => next(createDBError()));
 });
 
-router.delete('/:id', checkToken, (req, res, next) => {
+router.delete('/:id', /* checkToken, */ (req, res, next) => {
     ProductModel.findByIdAndDelete(req.params.id)
         .then(product => {
             if (product) {
@@ -47,7 +47,7 @@ router.delete('/:id', checkToken, (req, res, next) => {
         .catch(() => next(createDBError()));
 });
 
-router.get('/:id/reviews', checkToken, function (req, res) {
+router.get('/:id/reviews', /* checkToken, */ function (req, res) {
     ProductModel.findById(req.params.id)
         .then(product => {
             if (product) {
