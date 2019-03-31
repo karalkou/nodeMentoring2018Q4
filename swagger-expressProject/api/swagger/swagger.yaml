@@ -115,6 +115,7 @@ paths:
           $ref: '#/responses/NotFoundById'
 
   /products:
+    x-swagger-router-controller: products
     get:
       tags:
       - products
@@ -167,6 +168,7 @@ paths:
         400:
           $ref: '#/responses/DatabaseError'
   /products/{productId}:
+    x-swagger-router-controller: products
     get:
       tags:
       - products
@@ -219,6 +221,7 @@ paths:
         404:
           $ref: '#/responses/NotFoundById'
   /products/{productId}/reviews:
+    x-swagger-router-controller: products
     get:
       tags:
       - products
