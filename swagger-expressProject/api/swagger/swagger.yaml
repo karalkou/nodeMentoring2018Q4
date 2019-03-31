@@ -29,6 +29,7 @@ tags:
 
 paths:
   /users:
+    x-swagger-router-controller: users
     get:
       tags:
       - users
@@ -90,6 +91,7 @@ paths:
         400:
           $ref: '#/responses/DatabaseError'
   /users/{userId}:
+    x-swagger-router-controller: users
     delete:
       tags:
       - users
