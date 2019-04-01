@@ -30,6 +30,16 @@
     "commander": "^2.19.0",
     "csvtojson": "^2.0.8",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.0",
+    "passport": "^0.4.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "pg": "^7.8.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^2.1.0",
     "through2": "^3.0.0"
   }
 }

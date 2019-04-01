@@ -1,30 +1,44 @@
 [
     {
-        "id": 1,
-        "name": "Blue T-Shirt",
-        "brand": "Blue brand",
-        "price": 99.99,
-        "options": [
-            {
-                "color": "blue"
-            },
-            {
-                "size": "XL"
-            }
-        ]
+        "id": "1",
+        "isFavorite": false,
+        "color": "brown",
+        "name": "strawberry",
+        "reviews": 23
     },
     {
-        "id": 2,
-        "name": "Black T-Shirt",
-        "brand": "Black brand",
-        "price": 99.99,
-        "options": [
-            {
-                "color": "black"
-            },
-            {
-                "size": "XL"
-            }
-        ]
+        "id": "2",
+        "isFavorite": true,
+        "color": "green",
+        "name": "orange",
+        "reviews": 34
+    },
+    {
+        "id": "3",
+        "isFavorite": false,
+        "color": "brown",
+        "name": "orange",
+        "reviews": 39
+    },
+    {
+        "id": "4",
+        "isFavorite": false,
+        "color": "blue",
+        "name": "banana",
+        "reviews": 27
+    },
+    {
+        "id": "5",
+        "isFavorite": true,
+        "color": "brown",
+        "name": "apple",
+        "reviews": 23
+    },
+    {
+        "id": "6",
+        "isFavorite": true,
+        "color": "blue",
+        "name": "banana",
+        "reviews": 35
     }
 ]

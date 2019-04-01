@@ -302,3 +302,73 @@ Implement basic ​http server​​ using ​httpmodule in each of them with th
 3. Express is installed and the main server files are created following the requirements described in tasks 3 – 5.
 4. Appropriate middleware from tasks 6 – 7 are implemented properly.
 5. Application responds to all routes described in task 8.
+
+---
+
+## HOMEWORK 5
+### APPLICATION. VALIDATION. SECURITY
+#### Tasks
+1. Add `​/auth` ​route to your application.
+2. Implement standard login and password authentication:
+    1. POST `/auth` login and password should check user login and password (may behardcoded somewhere in application for now).
+    2. If user exists, generate **​JWT token**​​ (you can use any package for generating it,e.g. ​*jsonwebtoken*​) and send the following response:
+        ```js
+        {
+            "code": 200,
+            "message"​: ​"OK"​,
+            "data"​: {​
+                "user"​: {
+                    ​"email"​: ​"..."​,
+                    ​"username"​: ​"..."
+                }
+            },
+            "token"​: ​"..."
+        }
+        ```
+    3. If user does not exist or credentials do not much - send error response with theproper error code:
+        ```js
+        {
+            "code"​: ​404​,
+            ​"message"​: ​"Not Found"​,
+            ​"data"​: {
+                // ... additional error response data if needed ...
+            }
+        };
+        ```
+3. Write a **​middleware**​​ to verify ​**JWT token**​​ for all ​`/products​` and `​/users`​ routes from the **Homework** 4 (​`/auth​` route should be excluded from verification).
+4. Add *​passport​* package into your application.
+5. Implement local authentication strategy using *​passport*​ to allow login with user’s credentials​​ (hardcoded credentials from **​2b**​ may be used).
+6. Implement following authentication strategies using ​*passport​*:
+    1. **Facebook** strategy
+    1. **Twitter** strategy
+    1. **Google OAuth** strategy
+
+#### Evaluation Criteria
+1. All required routes is added and passport is installed (​tasks 1, 4​).
+2. Standard login and password authentication is implemented (​task 2​).
+3. JWT token is verified for all required routes (​task 3​).
+4. Local authentication strategy is implemented via passport (​task 5​).
+5. All authentication strategies is implemented via passport (​task 6​).
+
+---
+
+## HOMEWORK 6
+### SQL DATABASES. ORM
+#### Tasks
+1. Install ​*postgresql* ​(any way acceptable but the usage of docker container is preferred).
+2. Install *​sequelize* ​package.
+3. Create **database** and **​models**​​ directory.
+4. Setup ​*sequelize*​ to work with your project structure.
+5. Use ​*sequelize cli*​ tool to create **​users**​​ and **​products**​​ tables.
+6. Create migrations for **​users**​​.
+7. Modify application to import **​product**​​ data from model file (the base could be taken from **Homework 1**​​) to the database.
+8. Modify application to respond all routes from **​Homework 4**​​ and return data from​​​ the database.
+
+#### Evaluation Criteria
+1. All required packages installed (​tasks 1-2​).
+2. Database and related tables created; ​*sequelize*​ setup (​tasks 3-5​).
+3. Database created with all required migrations (​task 6​).
+4. The product data from file was imported to the database (​task 7​).
+5. All routes respond with the data from database (task 8).
+
+---

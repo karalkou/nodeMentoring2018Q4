@@ -3,12 +3,49 @@ const path = require('path');
 const { readFile } = require('fs');
 const { promisify } = require('util');
 const bodyParser = require('body-parser');
-const dataProvider = require('./controllers/data-provider/index.js');
+const Sequelize = require('sequelize');
+const sequelizeConfig = require('./config/sequelize');
+const DBInit = require("./helpers/database_sql");
 
 const readFileAsync = promisify(readFile);
 
 const app = express();
 const router = express.Router();
+
+const sequelize = new Sequelize(...sequelizeConfig);
+
+sequelize
+    .authenticate()
+    .then(() => DBInit(sequelize))
+    .catch(err => console.log(err));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/', router);
+
+// -------------- Authentication ----------------
+// ----------------------------------------------
+
+//-- JWT authentication
+const jwtChecklRouter = require('./routes/api/v1/auth/jwt');
+app.use('/api/v1/auth/', jwtChecklRouter);
+
+//-- passportJS authentication: Local Strategy
+const passportLocalRouter = require('./routes/api/v1/auth/local');
+app.use('/api/v1/auth/', passportLocalRouter);
+
+//--- passportJS authentication: Facebook Strategy
+const passportFacebookRouter = require('./routes/api/v1/auth/facebook');
+app.use('/api/v1/auth/', passportFacebookRouter);
+
+//--- passportJS authentication: Google OAuth2 Strategy
+const passportGoogleRouter = require('./routes/api/v1/auth/google');
+app.use('/api/v1/auth/', passportGoogleRouter);
+
+
+// -------------- Usual api routes ----------------
+// ------------------------------------------------
 
 router.get('/', function (req, res) {
     readFileAsync(path.resolve(__dirname, './index.html'))
@@ -24,42 +61,10 @@ router.get('/', function (req, res) {
         .catch(err => console.error(err));
 });
 
-app.use(bodyParser.urlencoded());
+const productsRouter = require('./routes/api/v1/products');
+app.use('/api/v1/products', productsRouter);
 
-router.route('/api/products')
-    .get(function (req, res) {
-        respond(dataProvider.readProducts(), res);
-    })
-    .post(function (req, res) {
-        console.log('-- req.body: ', req.body);
-        respond(dataProvider.addProduct(req.body), res);
-    });
-
-router.get('/api/products/:id', function (req, res) {
-    respond(dataProvider.readProductById(req.params.id), res);
-});
-
-router.get('/api/products/:id/reviews', function (req, res) {
-    respond(dataProvider.findProductReviews(req.params.id), res);
-});
-
-router.get('/api/users', function (req, res) {
-    respond(dataProvider.readUsers(), res);
-});
-
-app.use('/', router);
+const usersRouter = require('./routes/api/v1/users');
+app.use('/api/v1/users', usersRouter);
 
 module.exports = app;
-
-function respond(data, res) {
-    if (data === 400) {
-        res.writeHead(400);
-        res.end('400 Bad request');
-    } else if (!data) {
-        res.writeHead(404);
-        res.end('404 Not found');
-    } else {
-        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf8' });
-        res.end(JSON.stringify(data));
-    }
-}
