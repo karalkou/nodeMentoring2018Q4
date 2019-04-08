@@ -1,6 +1,7 @@
 const City = require("../../../expressProjectStructure/database/models/city");
 
 const getAllCities = (req, res) => {
+    console.log('------ aaaaaaaaaaaaaaaaa: ');
     City.find({}, (error, cities) => {
         if (error) {
             console.error("Error", error);
@@ -12,7 +13,6 @@ const getAllCities = (req, res) => {
 
 const createCity = (req, res) => {
     const { name, country, capital, location } = req.swagger.params.body.value;
-    console.log('------ aaaaaaaaaaaaaaaaa: ', name);
 
     City.create({ name, country, capital, location }, (error, city) => {
         if (error) {
