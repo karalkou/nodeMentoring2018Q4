@@ -396,20 +396,9 @@ responses:
         description: Unauthorized
         # schema:
         #   $ref: '#/definitions/Error'
+
 # complex objects have schema definitions
 definitions:
-    HelloWorldResponse:
-        required:
-            - message
-        properties:
-            message:
-                type: string
-    ErrorResponse:
-        required:
-            - message
-        properties:
-            message:
-                type: string
     User:
         type: object
         properties:

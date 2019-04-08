@@ -1,7 +1,9 @@
 'use strict';
 
-var SwaggerExpress = require('swagger-express-mw');
-var app = require('express')();
+const SwaggerExpress = require('swagger-express-mw');
+const app = require('express')();
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
 
 const connectToDB = require('./database/database');
 
@@ -21,9 +23,14 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
     var port = process.env.PORT || 10010;
     connectToDB
-        .then(() => app.listen(port, () => {
-            console.log(`Express server for swagger listening on port ${port}`);
-        }));
+        .then(() => {
+            const swaggerDocument = YAML.load('./api/swagger/swagger.yaml');
+            app.use('/api/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+            app.listen(port, () => {
+                console.log(`Express server for swagger listening on port ${port}`);
+            })
+        });
 
     // console.log("swaggerExpress.runner.swagger.paths: ", swaggerExpress.runner.swagger.paths);
 });
