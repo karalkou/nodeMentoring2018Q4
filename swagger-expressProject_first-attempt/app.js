@@ -24,6 +24,8 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
     var port = process.env.PORT || 10010;
 
+    console.log("swaggerExpress.runner.swagger.paths: ", swaggerExpress.runner.swagger.paths);
+
     connectToDB
         .then(
             () => {

@@ -1,4 +1,4 @@
-const Product = require("../../../expressProjectStructure/database/models/product");
+const Product = require("../../database/models/product");
 
 const getProducts = (req, res) => {
     Product.find({}, (error, products) => {
