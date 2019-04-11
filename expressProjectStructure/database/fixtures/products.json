@@ -1,0 +1,38 @@
+[
+    {
+        "isFavorite": false,
+        "color": "brown",
+        "name": "strawberry",
+        "reviews": 23
+    },
+    {
+        "isFavorite": true,
+        "color": "green",
+        "name": "orange",
+        "reviews": 34
+    },
+    {
+        "isFavorite": false,
+        "color": "brown",
+        "name": "orange",
+        "reviews": 39
+    },
+    {
+        "isFavorite": false,
+        "color": "blue",
+        "name": "banana",
+        "reviews": 27
+    },
+    {
+        "isFavorite": true,
+        "color": "brown",
+        "name": "apple",
+        "reviews": 23
+    },
+    {
+        "isFavorite": true,
+        "color": "blue",
+        "name": "banana",
+        "reviews": 35
+    }
+]

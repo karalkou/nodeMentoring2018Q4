@@ -3,63 +3,67 @@ const path = require('path');
 const { readFile } = require('fs');
 const { promisify } = require('util');
 const bodyParser = require('body-parser');
-const dataProvider = require('./controllers/data-provider/index.js');
+
+const db = require('./database/db');
 
 const readFileAsync = promisify(readFile);
 
 const app = express();
 const router = express.Router();
 
-router.get('/', function (req, res) {
-    readFileAsync(path.resolve(__dirname, './index.html'))
-        .then(data => {
-            if (data) {
-                res.writeHead(200, { 'Content-Type': 'text/html; charset=utf8' });
-                res.end(data);
-            } else {
-                res.writeHead(404);
-                res.end('404 not found');
-            }
-        })
-        .catch(err => console.error(err));
-});
+// Use connect method to connect to the Server
+db.connect(() => {
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded());
+    app.use('/', router);
 
-router.route('/api/products')
-    .get(function (req, res) {
-        respond(dataProvider.readProducts(), res);
-    })
-    .post(function (req, res) {
-        console.log('-- req.body: ', req.body);
-        respond(dataProvider.addProduct(req.body), res);
+// -------------- Authentication ----------------
+// ----------------------------------------------
+
+//-- JWT authentication
+    const jwtChecklRouter = require('./routes/api/v1/auth/jwt');
+    app.use('/api/v1/auth/', jwtChecklRouter);
+
+//-- passportJS authentication: Local Strategy
+    const passportLocalRouter = require('./routes/api/v1/auth/local');
+    app.use('/api/v1/auth/', passportLocalRouter);
+
+//--- passportJS authentication: Facebook Strategy
+    const passportFacebookRouter = require('./routes/api/v1/auth/facebook');
+    app.use('/api/v1/auth/', passportFacebookRouter);
+
+//--- passportJS authentication: Google OAuth2 Strategy
+    const passportGoogleRouter = require('./routes/api/v1/auth/google');
+    app.use('/api/v1/auth/', passportGoogleRouter);
+
+
+// -------------- Usual api routes ----------------
+// ------------------------------------------------
+
+    router.get('/', function (req, res) {
+        readFileAsync(path.resolve(__dirname, './index.html'))
+            .then(data => {
+                if (data) {
+                    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf8' });
+                    res.end(data);
+                } else {
+                    res.writeHead(404);
+                    res.end('404 not found');
+                }
+            })
+            .catch(err => console.error(err));
     });
 
-router.get('/api/products/:id', function (req, res) {
-    respond(dataProvider.readProductById(req.params.id), res);
+    const productsRouter = require('./routes/api/v1/products');
+    app.use('/api/v1/products', productsRouter);
+
+    const usersRouter = require('./routes/api/v1/users');
+    app.use('/api/v1/users', usersRouter);
+
+    const citiesRouter = require('./routes/api/v1/cities');
+    app.use('/api/v1/cities', citiesRouter);
 });
 
-router.get('/api/products/:id/reviews', function (req, res) {
-    respond(dataProvider.findProductReviews(req.params.id), res);
-});
-
-router.get('/api/users', function (req, res) {
-    respond(dataProvider.readUsers(), res);
-});
-
-app.use('/', router);
 
 module.exports = app;
-
-function respond(data, res) {
-    if (data === 400) {
-        res.writeHead(400);
-        res.end('400 Bad request');
-    } else if (!data) {
-        res.writeHead(404);
-        res.end('404 Not found');
-    } else {
-        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf8' });
-        res.end(JSON.stringify(data));
-    }
-}
