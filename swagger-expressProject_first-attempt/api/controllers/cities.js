@@ -1,7 +1,6 @@
 const City = require("../../../expressProjectStructure/database/models/city");
 
 const getAllCities = (req, res) => {
-    console.log('------ aaaaaaaaaaaaaaaaa: ');
     City.find({}, (error, cities) => {
         if (error) {
             console.error("Error", error);

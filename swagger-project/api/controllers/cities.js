@@ -1,5 +1,12 @@
 const City = require("../../database/models/city");
 
+const getRandomCity = (req, res) => {
+    City.aggregate([{ $sample: { size: 1 } }])
+        .then(city => {
+            res.send(city);
+        })
+};
+
 const getAllCities = (req, res) => {
     City.find({}, (error, cities) => {
         if (error) {
@@ -49,6 +56,7 @@ const deleteCity = (req, res) => {
 };
 
 module.exports = {
+    getRandomCity: getRandomCity,
     getAllCities: getAllCities,
     createCity: createCity,
     updateCityById: updateCityById,

@@ -318,6 +318,61 @@ paths:
                     $ref: '#/responses/DatabaseError'
                 404:
                     $ref: '#/responses/NotFoundById'
+    /cities/random:
+        x-swagger-router-controller: cities
+        get:
+            tags:
+                - cities
+            summary: Returns random city from collection
+            description: Returns random city
+            operationId: getRandomCity
+            produces:
+                - application/json
+            parameters: [
+                # - name: api_key
+                #   in: header
+                #   required: false
+                #   type: string
+            ]
+            responses:
+                200:
+                    description: successful operation
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/definitions/City'
+                400:
+                    $ref: '#/responses/DatabaseError'
+        post:
+            tags:
+                - cities
+            summary: Add a new city to the db
+            operationId: createCity
+            consumes:
+                - application/json
+                - application/x-www-form-urlencoded
+            produces:
+                - application/json
+            parameters:
+                # - name: api_key
+                #   in: header
+                #   required: false
+                #   type: string
+                - in: body
+                  name: body
+                  description: City object that needs to be added to the store
+                  required: true
+                  schema:
+                      $ref: '#/definitions/City'
+            responses:
+                200:
+                    description: successful operation
+                    schema:
+                        $ref: '#/definitions/City'
+                400:
+                    $ref: '#/responses/DatabaseError'
+                404:
+                    $ref: '#/responses/NotFoundById'
     /cities/{cityId}:
         x-swagger-router-controller: cities
         put:
