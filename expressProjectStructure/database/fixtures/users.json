@@ -1,0 +1,57 @@
+[
+    {
+        "age": 99,
+        "name": "admin",
+        "email": "admin@gmail.com",
+        "password": "admin",
+        "company": "admin"
+    },
+    {
+        "age": 30,
+        "name": "Brewer Hendrix",
+        "email": "brewerhendrix@gmail.com",
+        "password": "password",
+        "company": "QUANTASIS"
+    },
+    {
+        "age": 21,
+        "name": "Christy Hodges",
+        "email": "christyhodges@gmail.com",
+        "password": "password",
+        "company": "MONDICIL"
+    },
+    {
+        "age": 31,
+        "name": "Gwen Velasquez",
+        "email": "gwenvelasquez@gmail.com",
+        "company": "ZENOLUX"
+    },
+    {
+        "age": 30,
+        "name": "Ellis Goodwin",
+        "email": "ellisgoodwin@gmail.com",
+        "password": "password",
+        "company": "BUNGA"
+    },
+    {
+        "age": 30,
+        "name": "Cindy Dejesus",
+        "email": "cindydejesus@gmail.com",
+        "password": "password",
+        "company": "SNACKTION"
+    },
+    {
+        "age": 23,
+        "name": "Teresa Merrill",
+        "email": "teresamerrill@gmail.com",
+        "password": "password",
+        "company": "PROGENEX"
+    },
+    {
+        "age": 34,
+        "name": "Estelle Freeman",
+        "email": "estellefreeman@gmail.com",
+        "password": "password",
+        "company": "TOYLETRY"
+    }
+]

@@ -302,3 +302,132 @@ Implement basic ​http server​​ using ​httpmodule in each of them with th
 3. Express is installed and the main server files are created following the requirements described in tasks 3 – 5.
 4. Appropriate middleware from tasks 6 – 7 are implemented properly.
 5. Application responds to all routes described in task 8.
+
+---
+
+## HOMEWORK 5
+### APPLICATION. VALIDATION. SECURITY
+#### Tasks
+1. Add `​/auth` ​route to your application.
+2. Implement standard login and password authentication:
+    1. POST `/auth` login and password should check user login and password (may behardcoded somewhere in application for now).
+    2. If user exists, generate **​JWT token**​​ (you can use any package for generating it,e.g. ​*jsonwebtoken*​) and send the following response:
+        ```js
+        {
+            "code": 200,
+            "message"​: ​"OK"​,
+            "data"​: {​
+                "user"​: {
+                    ​"email"​: ​"..."​,
+                    ​"username"​: ​"..."
+                }
+            },
+            "token"​: ​"..."
+        }
+        ```
+    3. If user does not exist or credentials do not much - send error response with theproper error code:
+        ```js
+        {
+            "code"​: ​404​,
+            ​"message"​: ​"Not Found"​,
+            ​"data"​: {
+                // ... additional error response data if needed ...
+            }
+        };
+        ```
+3. Write a **​middleware**​​ to verify ​**JWT token**​​ for all ​`/products​` and `​/users`​ routes from the **Homework** 4 (​`/auth​` route should be excluded from verification).
+4. Add *​passport​* package into your application.
+5. Implement local authentication strategy using *​passport*​ to allow login with user’s credentials​​ (hardcoded credentials from **​2b**​ may be used).
+6. Implement following authentication strategies using ​*passport​*:
+    1. **Facebook** strategy
+    1. **Twitter** strategy
+    1. **Google OAuth** strategy
+
+#### Evaluation Criteria
+1. All required routes is added and passport is installed (​tasks 1, 4​).
+2. Standard login and password authentication is implemented (​task 2​).
+3. JWT token is verified for all required routes (​task 3​).
+4. Local authentication strategy is implemented via passport (​task 5​).
+5. All authentication strategies is implemented via passport (​task 6​).
+
+---
+
+## HOMEWORK 7
+### NoSQL DATABASES. ODM
+#### Tasks
+1. Install ​*mongodb* ​(any way acceptable but the usage of docker container is preferred).
+2. Create database in *mongodb*
+3. Create collection ​**cities** ​and fill it with the mock data by adding multiple documents into it
+   with the following schema (or a similar one):
+   ```js
+        {
+            name: ​‘Brest’,
+            country: ​‘Belarus’​,
+            capital: ​false​,
+            location: {
+                lat:​​ 52.097621​,
+                long: ​ 23.734050
+            }
+        }
+   ```
+4. Write a simple web server which will return a random city​​ on every request to it (you can
+   modify already existed one).
+5. Install ​*mongoose*​ package.
+6. Make your solution for ​**task 4** ​use ​*mongoose​* instead of the native implementation (define
+   **city​ model**)
+7. Create models for ​**user**​ and​ **product** ​via *mongoose* ​(use appropriate module files from
+   Homework 1​ ).
+8. Generate mock data for **users** and **products** and import​​ all of them via ​*mongoose​* in
+   **users** ​and ​**products**​ collections inside the database
+9. Add validations for appropriate fields of your models (e.g. ​*capital* field in ​**city**​ model)
+10. Modify application to respond all routes from ​**Homework 4​** and return data from​​ the
+    database
+11. Add additional routes and make your application responds on them:
+
+    | URL                       | METHOD  | ACTION                |
+    |---------------------------|---------|------------------------------------------------|
+    | /api/users/:id            | DELETE  | Deletes ​SINGLE ​user   |
+    | /api/products/:id         | DELETE  | Deletes ​SINGLE​ product|
+    | /api/cities               | GET     | Returns ​ALL ​cities    |
+    | /api/cities               | POST    | Adds ​NEW​ city and returns it|
+    | /api/cities/:id           | PUT     | Updates ​SINGLE city by ​ id if exists or adds NEW ​ city with the given ​id​ otherwise|
+    | /api/cities/:id           | DELETE  | Deletes ​SINGLE​ city   |
+
+12. Implement a function which will add extra field called ​*lastModifiedDate* ​with the
+current date for every created/updated item (every ​**PUT** ​and ​**POST** ​request for all ​**user​**,
+**product** ​and ​ **city​** entities).
+
+#### Evaluation Criteria
+1. All required packages installed, database created (​ tasks 1-2​ ).
+2. Simple web server implemented which returns random city in response (​ tasks 3-5​ ).
+3. All models implemented and data imported to database (​ task 6-8​ ).
+4. Validations applied and all implemented routes return data from database (​ tasks 9-10​ ).
+5. All routes (including additional) return data from database with extra field added
+automatically on creation/update (​ task​​ 11-12​ ).
+
+---
+
+## HOMEWORK 8
+### SWAGGER.DOCS
+#### Tasks
+1. Navigate to **​SwaggerHub**​​ and create your personal account here.
+2. Create new API with OpenAPI version 2.0.
+3. Create API documentation for all implemented routes from prerequisites. Make sure that your document ation contains following information:
+    1. name and description for every tag;
+    2. name, description, example value and model for every parameter;
+    3. all required parameter should be marked appropriately;
+    4. code and description for all possible responses;
+    5. definitions of all used models with refs set to them.
+4. Export (download) your API as YAML file.
+5. Install *​swagger* ​package.
+6. Create a new project based on the exported YAML file using ​**swagger**​ CLI.
+7. Edit your YAML using built in Swagger Editor so that your paths could use appropriate controllers for handling particular routes
+8. Implement routes handling logic from ​**Homework 7**​​in the corresponding controllers (all data should be returned from the database).
+9. Run the project server and make sure that your API responds on all implemented endpoints.
+
+#### Evaluation Criteria
+1. Account and new API were created (​tasks 1-2​).
+2. API documentation partially covers some of required routes or contains not all requiredinformation (​tasks 3​).
+3. API documentation covers all required routes with all required information described, APIwas successfully exported as YAML file (​task 3-4​).
+4. Swagger was installed, project was created (​tasks 5-7​).
+5. Project server responds on all required endpoints and returns data from the database(​task​​8-9​).

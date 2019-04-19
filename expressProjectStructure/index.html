@@ -7,17 +7,32 @@
     <title>Homework 4</title>
 </head>
 <body>
+<!--<form action="/auth" method="post">
+    <input type="text" name="userName" value="" required><br>
+    <input type="password" name="password" value="" required><br>
+    <button type="submit">Submit</button>
+</form>-->
 <ul>
-    <li><a href="/api/products" target="_blank">Products</a></li>
-    <li><a href="/api/products/2" target="_blank">Product by ID</a></li>
-    <li><a href="/api/products/0" target="_blank">Wrong Product ID</a></li>
-    <li><a href="/api/products/1/reviews" target="_blank">Reviews</a></li>
-    <li><a href="/api/users" target="_blank">Users</a></li>
+    <li><a href="/api/v1/products" target="_blank">Products</a></li>
+    <li><a href="/api/v1/products/2" target="_blank">Product by ID</a></li>
+    <li><a href="/api/v1/products/0" target="_blank">Wrong Product ID</a></li>
+    <li><a href="/api/v1/products/1/reviews" target="_blank">Reviews</a></li>
+    <li><a href="/api/v1/users" target="_blank">Users</a></li>
+    <li><a href="/api/v1/auth/facebook" target="_blank">Login with Facebook</a></li>
+    <li><a href="/api/v1/auth/google" target="_blank">Log In With Google</a></li>
 </ul>
 
-<form action="/api/products" method="post">
+<form action="/api/v1/products" method="post">
     <input type="text" name="name" value="Some product" required><br>
-    <input type="text" name="brand" value="Some brand" required><br>
+    <input type="text" name="color" value="Some color" required><br>
+    <label>
+        <input type="radio" name="isFavorite" value="true" checked required>
+        is favorite
+    </label><br>
+    <label>
+        <input type="radio" name="isFavorite" value="false" required>
+        not favorite
+    </label><br>
     <button type="submit">Add product</button>
 </form>
 </body>

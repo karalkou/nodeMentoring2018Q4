@@ -1,18 +1,31 @@
 [
     {
         "id": 0,
-        "name": "Alex"
+        "name": "Alex",
+        "email": "alexCoder@belmail.com",
+        "userName": "alexCoder",
+        "password": "12"
     },
     {
         "id": 2,
-        "name": "Tony"
+        "name": "Tony",
+        "email":  "TonyWinters@belmail.com",
+        "userName": "TonyWinters",
+        "password": "34"
     },
     {
         "id": 4,
-        "name": "Verelle"
+        "name": "Verelle",
+        "email":  "Verelle@belmail.com",
+        "userName": "VerelleLeBorisse",
+        "password": "56"
     },
     {
         "id": 6,
-        "name": "George"
+        "name": "George",
+        "displayName": "Yury Karalkou",
+        "email":  "yury.karalkou@gmail.com",
+        "userName": "GeorgioRegani",
+        "password": "78"
     }
 ]
